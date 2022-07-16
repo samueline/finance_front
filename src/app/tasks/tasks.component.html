@@ -1,0 +1,75 @@
+<mat-card class="size-card"> 
+  <mat-card-title>Tareas para hacer</mat-card-title>
+
+  <form [formGroup]="data" (ngSubmit)="crear()" >
+    <input type="hidden" formControlName="id">
+  <br>
+    <mat-form-field appearance="fill">
+      <input matInput formControlName="titulo">
+    
+      </mat-form-field>
+      
+  <br>
+<mat-form-field appearance="fill">
+  
+    <mat-label>Escoge la fecha</mat-label>
+    <input matInput formControlName="fecha_ejecucion" [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+
+   
+  </mat-form-field>
+<br>
+  <mat-form-field>
+    <label for="">Descripcion</label>
+  <textarea  matInput width="100%" formControlName="descripcion" name="" id="" cols="150" rows="10"></textarea>
+
+  </mat-form-field>
+  <br>
+  <br>
+  <button  mat-raised-button color="warn" type="submit">Enviar</button>
+</form>
+</mat-card>
+
+
+
+
+<table mat-table [dataSource]="listado" class="mat-elevation-z8 table-size">
+    
+  <ng-container matColumnDef="Nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+    <td mat-footer-cell *matFooterCellDef> - </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="Descripcion">
+    <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+    <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+    <td mat-footer-cell *matFooterCellDef> - </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+    <td mat-cell *matCellDef="let element"> {{element.fecha_ejecucion}} </td>
+    <td mat-footer-cell *matFooterCellDef>- </td>
+  </ng-container>
+
+  <ng-container matColumnDef="editar">
+    <th mat-header-cell *matHeaderCellDef> Editar </th>
+    <td mat-cell *matCellDef="let element" > <button mat-raised-button color="primary" type="button" > + </button> </td>
+    <td mat-footer-cell *matFooterCellDef> - </td>
+  </ng-container>
+
+  <ng-container matColumnDef="eliminar">
+    <th mat-header-cell *matHeaderCellDef> Completado </th>
+    <td mat-cell *matCellDef="let element" > <button mat-raised-button (click)="eliminar(element.id)" color="primary" type="button" > -- </button> </td>
+    <td mat-footer-cell *matFooterCellDef> - </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+  
+</table>

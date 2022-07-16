@@ -1,0 +1,23 @@
+<br>
+<h1>Estadisticas</h1>
+<br>
+<mat-list>
+    <!-- total -->
+    <mat-list-item *ngIf="resp.total < 0" style="background-color: rgba(206, 7, 7, 0.514);" > Total mes: {{resp.total | currency}}</mat-list-item>
+    <mat-list-item *ngIf="resp.total >= 0" style="background-color: rgba(41, 163, 30, 0.658)" > Total mes: {{resp.total | currency}}</mat-list-item>
+    
+    <mat-divider></mat-divider>
+    <!-- ahorro -->
+    <mat-list-item  style="background-color: rgba(41, 163, 30, 0.658);">Ahorro que debe tener: {{resp.ahorro | currency}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <!-- se puede gastar -->
+    <mat-list-item *ngIf="resp.gastos < 0" style="background-color: rgba(206, 7, 7, 0.514);;">No puede gastar: {{resp.gastos | currency}}</mat-list-item>
+    <mat-list-item *ngIf="resp.gastos >= 0"  style="background-color: rgba(41, 163, 30, 0.658);">Se puede gastar: {{resp.gastos | currency}}</mat-list-item>
+
+  </mat-list>
+<br>
+
+
+
+
+
