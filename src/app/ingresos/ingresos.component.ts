@@ -1,7 +1,9 @@
 import { DATE_PIPE_DEFAULT_TIMEZONE } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { IngresosService } from '../services/ingresos.service';
+import { LoginService } from '../services/login/login.service';
 
 
 @Component({
@@ -16,14 +18,19 @@ export class IngresosComponent implements OnInit {
   constructor(
     private ingresoService:IngresosService,
     private formBuilder:FormBuilder,
+    private route:ActivatedRoute,
+    private loginService :LoginService
     
     ) { }
-
+  public id_user:any
   public ingreso:any = []
   public data:any  
-
+  public id:any
   ngOnInit(): void {
+    
+
     this.listar_ingreso()
+   
 
     this.data = this.formBuilder.group({
       name:['',Validators.required],
@@ -34,10 +41,11 @@ export class IngresosComponent implements OnInit {
 
 
     })
-
+    this.id = localStorage.getItem('user_id')
 
   }
 
+  
  
   botonEdit(lista:any){
     
@@ -88,7 +96,7 @@ export class IngresosComponent implements OnInit {
         "name":this.data.value.name,
         "descripcion":this.data.value.descripcion,
         "valor":this.data.value.valor,
-       
+        "user":this.id,
         "activo":1,
       };
       console.log("sadas",data)
@@ -107,7 +115,7 @@ export class IngresosComponent implements OnInit {
         "name":this.data.value.name,
         "descripcion":this.data.value.descripcion,
         "valor":this.data.value.valor,
-       
+        "user":this.id,
         "activo":1,
       };
       id = this.data.value.id

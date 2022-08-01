@@ -1,15 +1,5 @@
 
-<button mat-button [matMenuTriggerFor]="aboveMenu">Conteo</button>
-<mat-menu #aboveMenu="matMenu" yPosition="above">
-  <button mat-menu-item routerLink="gastos">Gastos</button>
-  <button mat-menu-item routerLink="ingresos">Ingresos</button>
-</mat-menu>
-
-<button mat-button [matMenuTriggerFor]="belowMenu">Estadisticas</button>
-<mat-menu #belowMenu="matMenu" yPosition="below">
-  <button mat-menu-item routerLink="total">Estadisticas</button>
-  <button mat-menu-item routerLink="tareas">Tareas</button>
-</mat-menu>
+<app-menu></app-menu>
 <!-- 
 <button mat-button [matMenuTriggerFor]="beforeMenu">Before</button>
 <mat-menu #beforeMenu="matMenu" xPosition="before">

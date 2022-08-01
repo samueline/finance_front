@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LoginService } from '../services/login/login.service';
 
@@ -14,12 +16,15 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder : FormBuilder,
-    private loginService:LoginService
+    private loginService:LoginService,
+    private router:Router
   ) { 
 
   }
  public data:any
  public dataSignup:any
+ public login_fail:boolean = false
+ public id:any
   ngOnInit(): void {
 
     this.data = this.formBuilder.group({
@@ -48,11 +53,32 @@ let data={
   "password":this.data.value.contrasena
 
 }
+
+
 this.loginService.login(data).subscribe(
   (  e: any) => {
   console.log(e)
+  if(e){
+    
+    this.login_fail = false
+    console.log(data.username)
+    this.loginService.get_user(data.username).subscribe(
+      (i:any)=>{
+      //id del usuario logueado
+        this.id = i
+        localStorage.setItem('user_id', this.id);
+    
+      }
+    )
+    this.router.navigate(['ingresos'])
+
+  }else{
+    this.login_fail = true 
+  }
 } 
+
 )
+
 
 }
 
@@ -72,6 +98,8 @@ let data={
 this.loginService.crear_user(data).subscribe(
   (  e: any) => {
   console.log(e)
+ 
+
 } 
 )
 

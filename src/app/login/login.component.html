@@ -1,19 +1,28 @@
-<p>login works!</p>
-<form action="" [formGroup]="data"(ngSubmit)="login()" >
-    
+<form action=""class="custom-form" [formGroup]="data"(ngSubmit)="login()" >
+    <h2>Login</h2>
+    <label for="">Username</label>
     <input type="text" formControlName="usuario">
+    <label for="">Password</label>
     <input type="text" formControlName="contrasena">
-    <button type="submit"> Enviar</button>
+    <button type="submit" > Enviar</button>
+    <p *ngIf="login_fail == true"> Login incorrecto</p>
 </form>
 
 
 
-<form action="" [formGroup]="dataSignup"(ngSubmit)="signup()" >
+<form action="" class="custom-form" [formGroup]="dataSignup"(ngSubmit)="signup()" >
+    <h1>Register</h1>
+    <label for="">Username</label>
     
     <input type="text" formControlName="username">
+    <label for="">Email</label>
+    
     <input type="text" formControlName="email">
+    
+    <label for="">Password</label>
     <input type="text" formControlName="password">
+    <label for="">Password confirmation</label>
 
     <input type="text" formControlName="password_confirmation">
-    <button type="submit"> Enviar</button>
-</form>
+    <button type="submit" > Enviar</button>
+</form> 

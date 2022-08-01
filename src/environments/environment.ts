@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  serverUrl : 'https://financesbackss.herokuapp.com/'
+  // serverUrl : 'https://financesbackss.herokuapp.com/'
+  serverUrl : "http://localhost:8000/"
 };
 
 /*

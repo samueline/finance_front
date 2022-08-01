@@ -32,6 +32,7 @@ export class StatisticsComponent implements OnInit {
     this.listar_ingreso()
     this.listarGasto()
    this.listarPorcentaje()
+   this.porcentajes_gasto()
   }
   
 
@@ -87,4 +88,21 @@ export class StatisticsComponent implements OnInit {
         }
       )
     }
+    public salidas :any
+    public fijo :any
+
+    public comida :any
+
+    porcentajes_gasto(){
+      let total = this.resp.gastos
+      let salidas //10 %
+      let gastos_fijos//brackets y recibos obligaciones 40%
+      let comida  //15%
+      this.salidas = total * 0.1
+      this.fijo = total * 0.4
+      this.comida = total * 0.15
+
+      
+    }
+
 }

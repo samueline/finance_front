@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { GastoService } from '../services/gastos/gasto.service';
+import { LoginService } from '../services/login/login.service';
 
 @Component({
   selector: 'app-gastos',
@@ -11,13 +12,16 @@ export class GastosComponent implements OnInit {
 
   constructor(
     private gastosService:GastoService,
-    private formBuilder : FormBuilder
+    private formBuilder : FormBuilder,
+    private loginService : LoginService
   ) { }
 displayedColumns: string[] = [ 'Nombre', 'Descripcion', 'Efectivo','editar'];
   public gastosList:any = []
   public data:any
   ngOnInit(): void {
     this.listarGasto()
+    
+
     this.data = this.formBuilder.group({
       name:['',Validators.required],
       descripcion:['',Validators.required],
@@ -26,10 +30,19 @@ displayedColumns: string[] = [ 'Nombre', 'Descripcion', 'Efectivo','editar'];
     
 
     })
-
+    this.id = localStorage.getItem('user_id')
 
   }
-
+public id:any
+  user(){
+    this.loginService.get_user(this.data.value.usuario).subscribe(
+      (i:any)=>{
+      //id del usuario logueado
+        this.id = i
+    
+      }
+    )
+  }
 
   botonEdit(lista:any){
     console.log("dasd",lista)
@@ -75,6 +88,7 @@ displayedColumns: string[] = [ 'Nombre', 'Descripcion', 'Efectivo','editar'];
       "name":this.data.value.name,
       "descripcion":this.data.value.descripcion,
       "valor":this.data.value.valor,
+      "user":this.id,
       "activo":1,
     };
     console.log("sadas",data)
@@ -92,6 +106,7 @@ displayedColumns: string[] = [ 'Nombre', 'Descripcion', 'Efectivo','editar'];
       "name":this.data.value.name,
       "descripcion":this.data.value.descripcion,
       "valor":this.data.value.valor,
+      "user":this.id,
       "activo":1,
     };
     let id = this.data.value.id

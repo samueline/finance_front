@@ -25,9 +25,16 @@ export class LoginService {
     }
   
     
-    get_user(){
-      const headers = new HttpHeaders()
-      return this.http.get(this.url+'login/listar', { headers:LoginService.HEADERS('application/json') })
+    get_user(data:any){
+      const headers: any = {
+        'Content-Type':'application/json'
+     };
+     //Post options pass it to HttpHeaders Class 
+     const httpOptions = {
+         headers: new HttpHeaders(headers),
+     };
+      let params =data
+      return this.http.post(this.url+'ingreso/get_user/'+data,params,  httpOptions )
     
     }
   

@@ -25,6 +25,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     IngresosComponent,
     GastosComponent,
     StatisticsComponent,
-    TasksComponent
+    TasksComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

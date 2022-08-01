@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoginService } from '../services/login/login.service';
 import { TareasService } from '../services/tasks/tareas.service';
 @Component({
   selector: 'app-tasks',
@@ -12,14 +13,16 @@ export class TasksComponent implements OnInit {
   constructor(
     private tareasService:TareasService,
     private formBuilder:FormBuilder,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private loginService : LoginService
   ) { }
-
+  public id:any
   public data:any = []
   displayedColumns: string[] = [ 'Nombre', 'Descripcion','fecha','editar','eliminar'];
   public listado:any=[]
   ngOnInit(): void {
     this.listar()
+    this.id = localStorage.getItem('user_id')
     this.data = this.formBuilder.group({
       titulo:[''],
       descripcion:[''],
@@ -27,9 +30,14 @@ export class TasksComponent implements OnInit {
       id:[]
 
     })
-
+   
 
   }
+
+
+ 
+ 
+
 listar(){
   this.tareasService.get_tareas().subscribe(
     e=>{
@@ -47,7 +55,9 @@ crear(){
   let data = {
     "titulo":this.data.value.titulo,
     "descripcion":this.data.value.descripcion,
-    "fecha_ejecucion":hoy
+    "fecha_ejecucion":hoy,
+    
+    "user": this.id
   }
   console.log(data)
   this.tareasService.crear_tareas(data).subscribe(
